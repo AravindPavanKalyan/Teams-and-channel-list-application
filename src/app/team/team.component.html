@@ -1,0 +1,28 @@
+<div *ngIf="team">
+  <h4 class='mt-0 mb-6'>{{team.name}}</h4>
+  <div class='layout-row justify-content-end mb-6'>
+    <input
+      placeholder='Enter Channel Name'
+      class="channel-name-input px-13"
+      [attr.data-test-id]="'channel-name-input-' + teamIndex"
+      [(ngModel)]="channelName" (input)="uniqueChannelName()"
+    />
+    <button [disabled]="!channelName || disableChannelBtn"
+      class='channel-name-btn x-small w-35 h-30 pa-6 ma-0 ml-6'
+      [attr.data-test-id]="'add-channel-btn-' + teamIndex"
+      (click)="handleAddChannel()"
+    >
+      Add Channel
+    </button>
+  </div>
+  <ul class='styled mb-20 pl-25' [attr.data-test-id]="'channel-list-' + teamIndex">
+    <li *ngFor="let channel of team && team.channels; let i = index"
+      class='flex slide-up-fade-in justify-content-between align-items-center pl-10 pr-5 py-6 mt-0 mb-6'
+    >
+      <span>{{channel.name}}</span>
+      <button (click)="removeChannel(i)" [attr.data-test-id]="'remove-channel-button-' + teamIndex + i" class='icon-only x-small danger ma-0 pa-0'>
+          <i class="material-icons">delete</i>
+      </button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,27 @@
+<div class='w-50 mx-auto'>
+    <div class='card w-40 mt-50 mx-auto px-10 py-15'>
+
+      <div class='layout-column' data-test-id='team-list'>
+        <team *ngFor="let team of teams; let i = index" [team]="team" [teamIndex]="i" (cancelChannel)="removeChannel($event, i)"
+          (newChannel)="addChannel($event, i)">
+        </team>
+      </div>
+
+      <div class='layout-row'>
+        <input
+          placeholder='Enter Team Name' [(ngModel)]="newTeam"
+          class='team-list-input w-75'
+          data-test-id='team-name-input'
+          (input)="uniqueTeamName()"
+        />
+        <button
+        [disabled]="!newTeam || disableTeamBtn"
+          class='team-list-btn x-small w-35 h-30 pa-6 ma-0 ml-6'
+          data-test-id='add-team-btn' (click)="addTeam(newTeam)"
+        >
+          Add Team
+        </button>
+      </div>
+
+    </div>
+  </div>
